@@ -1,0 +1,29 @@
+:root {
+	--color-good: #22aa22;
+	--color-bad: #ff2222;
+	--color-background: #1a1a1a;
+	--color-transparent: #00000000;
+}
+
+.status-graph {
+	display: flex;
+	flex-direction: row-reverse;
+	height: 20vh;
+}
+
+.graph-bar--good {
+	color: var(--color-good);
+}
+
+.graph-bar--bad {
+	color: var(--color-bad);
+}
+
+.graph-bar {
+	display: row;
+}
+
+.graph-bar__bar {
+	display: row;
+	height: 100%;
+}
