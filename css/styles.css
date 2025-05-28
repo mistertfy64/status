@@ -5,6 +5,15 @@
 	--color-transparent: #00000000;
 }
 
+body {
+	width: 100%;
+	font-family: "Roboto", serif;
+}
+
+.monospace {
+	font-family: "JetBrains Mono", monospace;
+}
+
 .status-graph {
 	display: flex;
 	flex-direction: row-reverse;
@@ -20,10 +29,9 @@
 }
 
 .graph-bar {
-	display: row;
+	width: 64px;
 }
 
 .graph-bar__bar {
-	display: row;
 	height: 100%;
 }
