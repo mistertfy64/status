@@ -59,12 +59,13 @@ function getFilledBar(data) {
 function getTextBar(data) {
 	const text = document.createElement("div");
 	text.style.textAlign = "center";
+	text.classList.add("monospace");
+	text.style.fontSize = "12px";
 	if (GOOD_STATUS_CODES.indexOf(data.statusCode) === -1) {
 		text.innerText = data.statusCode ?? "ERROR";
 	} else {
 		text.innerText = `${Math.round(data.timeTotal * 1000)}ms`;
 	}
-
 	return text;
 }
 
