@@ -20,7 +20,6 @@ body {
 	display: flex;
 	flex-direction: row;
 	height: 20vh;
-	top: 120px;
 	position: relative;
 	padding: 8px;
 	background-color: var(--color-graph-background);
