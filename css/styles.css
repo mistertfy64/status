@@ -1,0 +1,74 @@
+:root {
+	--color-good: #22aa22;
+	--color-bad: #ff2222;
+	--color-background: #1a1a1a;
+	--color-transparent: #00000000;
+	--color-graph-background: #ffffff;
+}
+
+body {
+	font-family: "Roboto", serif;
+	margin: 0%;
+	background-color: var(--color-background);
+	color: #ffffff;
+}
+
+.monospace {
+	font-family: "JetBrains Mono", monospace;
+}
+
+.status-graph {
+	display: flex;
+	flex-direction: row;
+	height: 20vh;
+	position: relative;
+}
+
+.graph {
+	background-color: var(--color-graph-background);
+	color: #000000;
+	font-family: "JetBrains Mono", monospace;
+	margin: 16px;
+	top: 10%;
+}
+
+.graph-bar--good {
+	color: var(--color-good);
+}
+
+.graph-bar--bad {
+	color: var(--color-bad);
+}
+
+.graph-bar {
+	width: 64px;
+}
+
+.graph-bar__bar {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.graph-bar__details {
+	border-width: 2px;
+	border-style: solid;
+	text-align: center;
+	top: -30%;
+	position: relative;
+	white-space: nowrap;
+	padding: 4px;
+	background-color: var(--color-graph-background);
+}
+
+.graph-bar__details--good {
+	border-color: var(--color-good);
+}
+
+.graph-bar__details--bad {
+	border-color: var(--color-bad);
+}
+
+header {
+	height: 10vh;
+}
