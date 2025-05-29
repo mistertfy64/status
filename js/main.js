@@ -1,6 +1,6 @@
 const GRAPH_UPPER_POINT = 0;
 const GRAPH_LOWER_POINT = 1;
-const LIMIT = 900;
+const LIMIT = 360;
 
 const GOOD_STATUS_CODES = [200, 301, 302];
 
