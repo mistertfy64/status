@@ -150,7 +150,7 @@ function getFormattedTime(data) {
 }
 
 async function getData(id) {
-	const data = fetch(`http://api.mistertfy64.com/service-status/${id}`);
+	const data = fetch(`https://api.mistertfy64.com/service-status/${id}`);
 	return data;
 }
 
