@@ -22,8 +22,14 @@ body {
 	flex-direction: row;
 	height: 20vh;
 	position: relative;
-	padding: 8px;
+}
+
+.graph {
 	background-color: var(--color-graph-background);
+	color: #000000;
+	font-family: "JetBrains Mono", monospace;
+	margin: 16px;
+	top: 10%;
 }
 
 .graph-bar--good {

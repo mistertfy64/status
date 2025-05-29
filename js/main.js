@@ -5,18 +5,22 @@ const LIMIT = 360;
 const GOOD_STATUS_CODES = [200, 301, 302];
 
 async function getSectionHTML(id) {
+	const response = await getData(id);
+	const data = await response.json();
 	const html = document.createElement("div");
-	const graphHTML = await getGraph(id);
+	html.classList.add("graph");
+	const headerHTML = getStatusGraphHeader(data);
+	html.appendChild(headerHTML);
+	const graphHTML = await getGraph(data);
 	html.appendChild(graphHTML);
 	return html;
 }
 
-async function getGraph(id) {
-	const response = await getData(id);
-	const data = await response.json();
+async function getGraph(data) {
 	const statusData = data.status;
 	const html = document.createElement("div");
 	html.classList.add("status-graph");
+
 	for (const statusAtTime of statusData) {
 		const bar = document.createElement("div");
 		bar.classList.add("graph-bar");
@@ -150,10 +154,36 @@ async function getData(id) {
 	return data;
 }
 
+function getStatusGraphHeader(data) {
+	const header = document.createElement("div");
+	const name = document.createElement("div");
+	name.textContent = data.service;
+	const percentage = document.createElement("div");
+	const good = data.status.filter(
+		(element) => GOOD_STATUS_CODES.indexOf(element.statusCode) > -1
+	);
+	const total = data.status.length;
+	const uptime = `${((good.length / total) * 100).toFixed(
+		3
+	)}% (last 360 min.)`;
+	percentage.textContent = uptime;
+	header.appendChild(name);
+	header.appendChild(percentage);
+	header.style.display = "flex";
+	header.style.flexDirection = "row";
+	header.style.justifyContent = "space-between";
+	name.style.padding = "4px";
+	percentage.style.padding = "4px";
+	header.style.width = "100%";
+	return header;
+}
+
 async function initialize() {
-	const html = await getSectionHTML(0);
-	const main = document.getElementsByTagName("main")[0];
-	main.append(html);
+	for (let serviceID = 0; serviceID < 4; serviceID++) {
+		const html = await getSectionHTML(serviceID);
+		const main = document.getElementsByTagName("main")[0];
+		main.append(html);
+	}
 }
 
 initialize();
