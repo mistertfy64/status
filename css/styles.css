@@ -3,10 +3,13 @@
 	--color-bad: #ff2222;
 	--color-background: #1a1a1a;
 	--color-transparent: #00000000;
+	--color-graph-background: #ffffff;
 }
 
 body {
 	font-family: "Roboto", serif;
+	margin: 0%;
+	background-color: var(--color-background);
 }
 
 .monospace {
@@ -15,8 +18,12 @@ body {
 
 .status-graph {
 	display: flex;
-	flex-direction: row-reverse;
+	flex-direction: row;
 	height: 20vh;
+	top: 120px;
+	position: relative;
+	padding: 8px;
+	background-color: var(--color-graph-background);
 }
 
 .graph-bar--good {
@@ -33,4 +40,25 @@ body {
 
 .graph-bar__bar {
 	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.graph-bar__details {
+	border-width: 2px;
+	border-style: solid;
+	text-align: center;
+	top: -30%;
+	position: relative;
+	white-space: nowrap;
+	padding: 4px;
+	background-color: var(--color-graph-background);
+}
+
+.graph-bar__details--good {
+	border-color: var(--color-good);
+}
+
+.graph-bar__details--bad {
+	border-color: var(--color-bad);
 }
