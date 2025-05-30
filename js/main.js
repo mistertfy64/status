@@ -106,7 +106,12 @@ function getBarUppermostText(data) {
 
 function getBarUpperText(data) {
 	const text = document.createElement("div");
-	text.textContent = `(${getFormattedTime(data)})`;
+	const number = document.createElement("span");
+	number.classList.add("ago");
+	number.textContent = `${getFormattedTime(data)}`;
+	text.append("(");
+	text.append(number);
+	text.append(" min. ago)");
 	text.style.fontSize = "8px";
 	return text;
 }
@@ -132,7 +137,7 @@ function getBarLowerText(data) {
 function getFormattedTime(data) {
 	const time = new Date();
 	const minutes = Math.floor((time - data.timestamp) / (60 * 1000));
-	return `${minutes} min. ago`;
+	return `${minutes}`;
 }
 
 async function getData(id) {
