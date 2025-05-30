@@ -6,27 +6,29 @@ const GOOD_STATUS_CODES = [200, 301, 302];
 
 const SERVICE_STATUS = {};
 
-async function getSectionHTML(data) {
+async function getSectionHTML(data, serviceID) {
 	const html = document.createElement("div");
 	html.classList.add("graph");
 	const headerHTML = getStatusGraphHeader(data);
 	html.appendChild(headerHTML);
-	const graphHTML = await getGraph(data);
+	const graphHTML = await getGraph(data, serviceID);
 	html.appendChild(graphHTML);
 	return html;
 }
 
-async function getGraph(data) {
+async function getGraph(data, serviceID) {
 	const statusData = data.status;
 	const html = document.createElement("div");
 	html.classList.add("status-graph");
 
+	let number = 0;
 	for (const statusAtTime of statusData) {
 		const bar = document.createElement("div");
 		bar.classList.add("graph-bar");
 		bar.classList.add(getBarColor(statusAtTime));
-		bar.append(getFilledBar(statusAtTime));
+		bar.append(getFilledBar(statusAtTime, serviceID, number));
 		html.append(bar);
+		number++;
 	}
 	return html;
 }
@@ -38,7 +40,7 @@ function getBarColor(data) {
 	return "graph-bar--bad";
 }
 
-function getFilledBar(data) {
+function getFilledBar(data, serviceID, number) {
 	const filledBar = document.createElement("div");
 	filledBar.classList.add("graph-bar__bar");
 	// bar color
@@ -62,7 +64,7 @@ function getFilledBar(data) {
 	barInformation.classList.add("graph-bar__details");
 	barInformation.classList.add("monospace");
 	barInformation.append(getBarUppermostText(data));
-	barInformation.append(getBarUpperText(data));
+	barInformation.append(getBarUpperText(data, serviceID, number));
 	barInformation.append(getBarMiddleText(data));
 	barInformation.append(getBarLowerText(data));
 	barInformation.style.display = "none";
@@ -104,10 +106,11 @@ function getBarUppermostText(data) {
 	return text;
 }
 
-function getBarUpperText(data) {
+function getBarUpperText(data, serviceID, order) {
 	const text = document.createElement("div");
 	const number = document.createElement("span");
 	number.classList.add("ago");
+	number.id = `ago-${serviceID}-${order}`;
 	number.textContent = `${getFormattedTime(data)}`;
 	text.append("(");
 	text.append(number);
@@ -170,7 +173,7 @@ async function initialize() {
 	for (let serviceID = 0; serviceID < 4; serviceID++) {
 		const response = await getData(serviceID);
 		const data = await response.json();
-		const html = await getSectionHTML(data);
+		const html = await getSectionHTML(data, serviceID);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
 		SERVICE_STATUS[serviceID] = data;
@@ -178,3 +181,16 @@ async function initialize() {
 }
 
 initialize();
+
+setInterval(function () {
+	for (let serviceID = 0; serviceID < 4; serviceID++) {
+		for (let agoNumber = 0; agoNumber < LIMIT; agoNumber++) {
+			const elementID = `ago-${serviceID}-${agoNumber}`;
+			const element = document.getElementById(elementID);
+			console.log(SERVICE_STATUS);
+			const timestamp =
+				SERVICE_STATUS[serviceID].status[agoNumber].timestamp;
+			element.textContent = getFormattedTime(timestamp);
+		}
+	}
+}, 1000);
