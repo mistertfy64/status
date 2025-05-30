@@ -32,6 +32,13 @@ body {
 	top: 10%;
 }
 
+.graph__header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
 .graph-bar--good {
 	color: var(--color-good);
 }

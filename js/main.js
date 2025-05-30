@@ -156,6 +156,7 @@ async function getData(id) {
 
 function getStatusGraphHeader(data) {
 	const header = document.createElement("div");
+	header.classList.add("graph__header");
 	const name = document.createElement("div");
 	name.textContent = data.service;
 	const percentage = document.createElement("div");
@@ -169,12 +170,8 @@ function getStatusGraphHeader(data) {
 	percentage.textContent = uptime;
 	header.appendChild(name);
 	header.appendChild(percentage);
-	header.style.display = "flex";
-	header.style.flexDirection = "row";
-	header.style.justifyContent = "space-between";
 	name.style.padding = "4px";
 	percentage.style.padding = "4px";
-	header.style.width = "100%";
 	return header;
 }
 
