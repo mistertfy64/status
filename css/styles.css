@@ -8,7 +8,6 @@
 
 body {
 	font-family: "Roboto", serif;
-	margin: 16px;
 	background-color: var(--color-background);
 	color: #ffffff;
 	overflow-x: hidden;

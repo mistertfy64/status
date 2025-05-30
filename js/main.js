@@ -1,7 +1,7 @@
 const GRAPH_UPPER_POINT = 0;
 const GRAPH_LOWER_POINT = 1;
 const LIMIT = 360;
-
+const GRAPH_MARGIN = 16;
 const GOOD_STATUS_CODES = [200, 301, 302];
 
 const SERVICE_STATUS = {};
@@ -93,10 +93,14 @@ function addEventListenersToBar(filledBar) {
 			document.documentElement.clientWidth || 0,
 			window.innerWidth || 0
 		);
-		if (rectangle.left < 32) {
-			details[0].style.left = `${Math.max(32, rectangle.left)}px`;
-		} else if (rectangle.right > vw - 32) {
-			details[0].style.right = `${Math.max(32, vw - rectangle.right)}px`;
+		if (rectangle.left < GRAPH_MARGIN) {
+			details[0].style.left = `${
+				Math.max(GRAPH_MARGIN, rectangle.left) - GRAPH_MARGIN
+			}px`;
+		} else if (rectangle.right > vw - GRAPH_MARGIN) {
+			details[0].style.right = `${
+				Math.max(GRAPH_MARGIN, vw - rectangle.right) - GRAPH_MARGIN
+			}px`;
 		}
 	});
 	filledBar.addEventListener("mouseout", function (event) {
