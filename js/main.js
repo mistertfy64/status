@@ -191,4 +191,4 @@ setInterval(function () {
 			element.textContent = getFormattedTime(data);
 		}
 	}
-}, 10000);
+}, 1000);
