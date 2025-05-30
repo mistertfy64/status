@@ -88,6 +88,16 @@ function addEventListenersToBar(filledBar) {
 			);
 		});
 		details[0].style.display = "block";
+		const rectangle = details[0].getBoundingClientRect();
+		const vw = Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0
+		);
+		if (rectangle.left < 32) {
+			details[0].style.left = `${Math.max(32, rectangle.left)}px`;
+		} else if (rectangle.right > vw - 32) {
+			details[0].style.right = `${Math.max(32, vw - rectangle.right)}px`;
+		}
 	});
 	filledBar.addEventListener("mouseout", function (event) {
 		const details = Array.from(this.children).filter(function (element) {
@@ -95,6 +105,8 @@ function addEventListenersToBar(filledBar) {
 				Array.from(element.classList).indexOf("graph-bar__details") > -1
 			);
 		});
+		details[0].style.left = `initial`;
+		details[0].style.right = `initial`;
 		details[0].style.display = "none";
 	});
 }
