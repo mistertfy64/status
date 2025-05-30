@@ -139,7 +139,7 @@ function getBarLowerText(data) {
 
 function getFormattedTime(data) {
 	const time = new Date();
-	const minutes = Math.floor((time - data.timestamp) / (60 * 1000));
+	const minutes = Math.floor((time - data.timestamp) / 1000);
 	return `${minutes}`;
 }
 
@@ -187,10 +187,8 @@ setInterval(function () {
 		for (let agoNumber = 0; agoNumber < LIMIT; agoNumber++) {
 			const elementID = `ago-${serviceID}-${agoNumber}`;
 			const element = document.getElementById(elementID);
-			console.log(SERVICE_STATUS);
-			const timestamp =
-				SERVICE_STATUS[serviceID].status[agoNumber].timestamp;
-			element.textContent = getFormattedTime(timestamp);
+			const data = SERVICE_STATUS[serviceID].status[agoNumber];
+			element.textContent = getFormattedTime(data);
 		}
 	}
 }, 1000);
