@@ -3,7 +3,7 @@ const GRAPH_LOWER_POINT = 1;
 const LIMIT = 360;
 const GRAPH_MARGIN = 16;
 const GOOD_STATUS_CODES = [200, 301, 302];
-
+const SERVICES = 4;
 const SERVICE_STATUS = {};
 
 async function getSectionHTML(data, serviceID) {
@@ -160,7 +160,7 @@ function getFormattedTime(data) {
 }
 
 async function getData(id) {
-	const data = fetch(`http://localhost:10002/service-status/${id}`);
+	const data = fetch(`https://api.mistertfy64.com/service-status/${id}`);
 	return data;
 }
 
@@ -187,20 +187,32 @@ function getStatusGraphHeader(data) {
 }
 
 async function initialize() {
-	for (let serviceID = 0; serviceID < 4; serviceID++) {
+	ok = true;
+	for (let serviceID = 0; serviceID < SERVICES; serviceID++) {
 		const response = await getData(serviceID);
 		const data = await response.json();
 		const html = await getSectionHTML(data, serviceID);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
 		SERVICE_STATUS[serviceID] = data;
+		const statusCode = SERVICE_STATUS[serviceID].status[LIMIT - 1].code;
+		if (GOOD_STATUS_CODES.indexOf(statusCode) > -1) {
+			ok = false;
+		}
 	}
+	if (ok) {
+		document.getElementById("status-summary").textContent = `ONLINE`;
+	} else {
+		document.getElementById("status-summary").textContent = `OUTAGE`;
+	}
+	const lastUpdated = `${new Date().toISOString()}`;
+	document.getElementById("status-last-update").textContent = lastUpdated;
 }
 
 initialize();
 
 setInterval(function () {
-	for (let serviceID = 0; serviceID < 4; serviceID++) {
+	for (let serviceID = 0; serviceID < SERVICES; serviceID++) {
 		for (let agoNumber = 0; agoNumber < LIMIT; agoNumber++) {
 			const elementID = `ago-${serviceID}-${agoNumber}`;
 			const element = document.getElementById(elementID);
