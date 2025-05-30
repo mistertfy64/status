@@ -4,8 +4,9 @@ const LIMIT = 360;
 
 const GOOD_STATUS_CODES = [200, 301, 302];
 
-async function getSectionHTML(id) {
-	const response = await getData(id);
+const SERVICE_STATUS = {};
+
+async function getSectionHTML(response) {
 	const data = await response.json();
 	const html = document.createElement("div");
 	html.classList.add("graph");
@@ -168,7 +169,8 @@ function getStatusGraphHeader(data) {
 
 async function initialize() {
 	for (let serviceID = 0; serviceID < 4; serviceID++) {
-		const html = await getSectionHTML(serviceID);
+		const response = await getData(serviceID);
+		const html = await getSectionHTML(response);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
 	}
