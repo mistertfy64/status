@@ -8,9 +8,9 @@
 
 body {
 	font-family: "Roboto", serif;
-	margin: 0%;
 	background-color: var(--color-background);
 	color: #ffffff;
+	overflow-x: hidden;
 }
 
 .monospace {
@@ -22,6 +22,8 @@ body {
 	flex-direction: row;
 	height: 20vh;
 	position: relative;
+	width: 100%;
+	min-width: 0;
 }
 
 .graph {
@@ -30,6 +32,16 @@ body {
 	font-family: "JetBrains Mono", monospace;
 	margin: 16px;
 	top: 10%;
+	border: 2px solid #000000;
+	z-index: 3;
+	position: relative;
+}
+
+.graph__header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .graph-bar--good {
@@ -41,7 +53,9 @@ body {
 }
 
 .graph-bar {
-	width: 64px;
+	flex-basis: 0;
+	flex-grow: 1;
+	z-index: 2;
 }
 
 .graph-bar__bar {
@@ -55,10 +69,12 @@ body {
 	border-style: solid;
 	text-align: center;
 	top: -30%;
-	position: relative;
 	white-space: nowrap;
+	position: absolute;
 	padding: 4px;
 	background-color: var(--color-graph-background);
+	height: fit-content;
+	z-index: 4;
 }
 
 .graph-bar__details--good {
@@ -71,4 +87,21 @@ body {
 
 header {
 	height: 10vh;
+	margin: 16px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#icon {
+	display: flex;
+	flex-direction: column;
+}
+
+#summary {
+	text-align: right;
+	flex-direction: column;
+}
+
+#status-summary {
+	font-size: 36px;
 }
