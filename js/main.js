@@ -26,7 +26,6 @@ async function getGraph(data) {
 		bar.classList.add("graph-bar");
 		bar.classList.add(getBarColor(statusAtTime));
 		bar.append(getFilledBar(statusAtTime));
-		bar.append(getTextBar(statusAtTime));
 		html.append(bar);
 	}
 	return html;
@@ -66,7 +65,6 @@ function getFilledBar(data) {
 	barInformation.append(getBarUpperText(data));
 	barInformation.append(getBarMiddleText(data));
 	barInformation.append(getBarLowerText(data));
-	barInformation.style.position = "absolute";
 	barInformation.style.display = "none";
 
 	if (GOOD_STATUS_CODES.indexOf(data.statusCode) === -1) {
@@ -97,18 +95,6 @@ function addEventListenersToBar(filledBar) {
 		});
 		details[0].style.display = "none";
 	});
-}
-
-function getTextBar(data) {
-	const text = document.createElement("div");
-	text.style.textAlign = "center";
-	text.classList.add("monospace");
-	text.style.position = "absolute";
-	text.style.fontSize = "12px";
-	if (GOOD_STATUS_CODES.indexOf(data.statusCode) === -1) {
-		// text.innerText = `ERROR ${data.statusCode}` ?? "ERROR ???";
-	}
-	return text;
 }
 
 function getBarUppermostText(data) {
@@ -150,7 +136,7 @@ function getFormattedTime(data) {
 }
 
 async function getData(id) {
-	const data = fetch(`https://api.mistertfy64.com/service-status/${id}`);
+	const data = fetch(`http://localhost:10002/service-status/${id}`);
 	return data;
 }
 
