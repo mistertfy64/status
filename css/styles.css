@@ -88,4 +88,20 @@ body {
 header {
 	height: 10vh;
 	margin: 16px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#icon {
+	display: flex;
+	flex-direction: column;
+}
+
+#summary {
+	text-align: right;
+	flex-direction: column;
+}
+
+#status-summary {
+	font-size: 36px;
 }
