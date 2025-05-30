@@ -173,6 +173,7 @@ async function initialize() {
 		const html = await getSectionHTML(data);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
+		SERVICE_STATUS[serviceID] = data;
 	}
 }
 
