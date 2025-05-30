@@ -170,6 +170,7 @@ function getStatusGraphHeader(data) {
 	const name = document.createElement("div");
 	name.textContent = data.service;
 	const percentage = document.createElement("div");
+	percentage.style.textAlign = "right";
 	const good = data.status.filter(
 		(element) => GOOD_STATUS_CODES.indexOf(element.statusCode) > -1
 	);
