@@ -139,7 +139,7 @@ function getBarLowerText(data) {
 
 function getFormattedTime(data) {
 	const time = new Date();
-	const minutes = Math.floor((time - data.timestamp) / 1000);
+	const minutes = Math.floor((time - data.timestamp) / 60000);
 	return `${minutes}`;
 }
 
