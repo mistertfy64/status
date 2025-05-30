@@ -6,8 +6,7 @@ const GOOD_STATUS_CODES = [200, 301, 302];
 
 const SERVICE_STATUS = {};
 
-async function getSectionHTML(response) {
-	const data = await response.json();
+async function getSectionHTML(data) {
 	const html = document.createElement("div");
 	html.classList.add("graph");
 	const headerHTML = getStatusGraphHeader(data);
@@ -170,7 +169,8 @@ function getStatusGraphHeader(data) {
 async function initialize() {
 	for (let serviceID = 0; serviceID < 4; serviceID++) {
 		const response = await getData(serviceID);
-		const html = await getSectionHTML(response);
+		const data = await response.json();
+		const html = await getSectionHTML(data);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
 	}
