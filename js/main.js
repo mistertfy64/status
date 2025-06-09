@@ -1,9 +1,9 @@
-const GRAPH_UPPER_POINT = 0;
-const GRAPH_LOWER_POINT = 1;
+const GRAPH_LOWER_POINT = 0;
+const GRAPH_UPPER_POINT = 1;
 const LIMIT = 360;
 const GRAPH_MARGIN = 16;
 const GOOD_STATUS_CODES = [200, 301, 302];
-const SERVICES = 4;
+const SERVICES = 1;
 const SERVICE_STATUS = {};
 
 async function getSectionHTML(data, serviceID) {
@@ -52,11 +52,11 @@ function getFilledBar(data, serviceID, number) {
   )`;
 	} else {
 		filledBar.style.background = `linear-gradient(to top, var(--color-good), var(--color-good) ${
-			100 - (data.timeTotal / GRAPH_LOWER_POINT) * 100
+			(data.timeTotal / GRAPH_UPPER_POINT) * 100
 		}%, var(--color-good) ${
-			100 - (data.timeTotal / GRAPH_LOWER_POINT) * 100
+			(data.timeTotal / GRAPH_UPPER_POINT) * 100
 		}%, var(--color-transparent) ${
-			100 - (data.timeTotal / GRAPH_LOWER_POINT) * 100
+			(data.timeTotal / GRAPH_UPPER_POINT) * 100
 		}%, var(--color-transparent) 100%)`;
 	}
 
