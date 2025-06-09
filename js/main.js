@@ -3,7 +3,7 @@ const GRAPH_UPPER_POINT = 1;
 const LIMIT = 360;
 const GRAPH_MARGIN = 16;
 const GOOD_STATUS_CODES = [200, 301, 302];
-const SERVICES = 1;
+const SERVICES = 4;
 const SERVICE_STATUS = {};
 
 async function getSectionHTML(data, serviceID) {
