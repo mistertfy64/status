@@ -193,7 +193,8 @@ async function initialize() {
 	ok = true;
 	for (let serviceID = 0; serviceID < SERVICES; serviceID++) {
 		const response = await getData(serviceID);
-		const data = await response.json();
+		const responseJSON = await response.json();
+		const data = responseJSON.data;
 		const html = await getSectionHTML(data, serviceID);
 		const main = document.getElementsByTagName("main")[0];
 		main.append(html);
